@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+
+  backend:
+    build:
+      context: ./pythonBackend
+      dockerfile: Dockerfile
+    working_dir: /xre/backend
+    
+
+    volumes:
+            - ./pythonBackend:/xre/backend
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    working_dir: /xre/frontend
+
+    env_file:
+      - ./frontend/.env
+
+    expose:
+      - 5173
+    ports:
+      - "5173:5173"
+volumes:
+  # static-ui-content:
+  static-ui-content:
